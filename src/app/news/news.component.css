@@ -1,0 +1,107 @@
+.filter {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* The checkbox-container */
+.checkbox-container {
+    position: relative;
+    padding-left: 35px;
+    margin: 0px 10px;
+    cursor: pointer;
+    font-size: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 2px;
+    left: 0px;
+    height: 25px;
+    width: 25px;
+    background-color: #595959;
+    border-radius: 50%;
+  }
+  
+  .optCheckmark {
+    height: 20px;
+    width: 20px;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .checkbox-container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a orange background */
+  .checkbox-container input:checked ~ .checkmark {
+    background-color: rgb(255, 102, 0);
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .checkbox-container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 7px;
+    height: 14px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    border-radius: 30%;
+  }
+  .optCheckmark:after {
+    left: 7px!important;
+    top: 4px!important;
+    width: 6px!important;
+    height: 12px!important;
+  }
+
+  .votearrow {
+    width: 10px;
+    height: 10px;
+    border: 0px;
+    margin: 3px 2px 6px;
+    background: url('../../assets/images/grayarrow.gif') no-repeat;
+  }
+
+  td div {
+    display: inline-block;
+  }
+
+  .storyDetail {
+    padding-left: 20px;
+    display: block!important;
+    font-size: 12px;
+    color: #828282;
+  }
+
+  .userLink, .title {
+    color: inherit;
+    text-decoration: none;
+  }

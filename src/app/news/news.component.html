@@ -1,0 +1,56 @@
+<div class="filter">
+  <div class="row">
+    <div class="col-md-7 col-sm-12 col-xs-12">
+      <input type="text" name="titleSearch" class="form-control search" placeholder="Search by title" (keyup)="filterData($event)">
+    </div>
+
+    <div class="col-md-5 col-sm-12 col-xs-12">
+      <!-- <form (ngSubmit)="onSubmit()" #f="ngForm"> -->
+        <div class="row">
+          <div class="col-md-3 col-sm-12 col-xs-12">
+            <label class="checkbox-container optFontSize">
+              <input type="radio" name="searchCategory" value="top" checked (change)="changeSearchCategory($event)">
+              <span>Top</span>
+              <span class="checkmark optCheckmark"></span>
+            </label>
+          </div>
+          <div class="col-md-3 col-sm-12 col-xs-12">
+            <label class="checkbox-container optFontSize">
+              <input type="radio" name="searchCategory" value="ask" (change)="changeSearchCategory($event)">
+              <span>Ask</span>
+              <span class="checkmark optCheckmark"></span>
+            </label>
+          </div>
+          <div class="col-md-3 col-sm-12 col-xs-12">
+            <label class="checkbox-container optFontSize">
+              <input type="radio" name="searchCategory" value="show" (change)="changeSearchCategory($event)">
+              <span>Show</span>
+              <span class="checkmark optCheckmark"></span>
+            </label>
+          </div>
+          <div class="col-md-3 col-sm-12 col-xs-12">
+            <label class="checkbox-container optFontSize">
+              <input type="radio" name="searchCategory" value="jobs" (change)="changeSearchCategory($event)">
+              <span>Jobs</span>
+              <span class="checkmark optCheckmark"></span>
+            </label>
+          </div>
+        </div>
+      <!-- </form> -->
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="stories.length === 0">No Stories Found</div>
+<div *ngIf="stories.length > 0">
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let story of stories; let i = index">
+        <td>
+          {{ i+1 }} <div class="storyTitle"><div class="votearrow"></div> <a target="_blank" class="title" [href]="story.url">{{ story.title }}</a></div>
+          <div class="storyDetail"><div>{{ story.score }} Points by <a class="userLink" [routerLink] = "['/user', story.by]">{{ story.by }}</a> {{ timeSince(story.time) }}</div> | {{ story.descendants }} comments</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>  
+</div>
