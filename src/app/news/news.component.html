@@ -41,7 +41,7 @@
   </div>
 </div>
 
-<div class="container" *ngIf="stories.length === 0">No Stories Found</div>
+<div class="container" *ngIf="stories.length === 0">{{ !isFiltered ? 'Refresh & Loading.....' : 'No Data Found!' }}</div>
 <div *ngIf="stories.length > 0">
   <table class="table">
     <tbody>

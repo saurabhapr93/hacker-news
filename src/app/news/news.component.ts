@@ -11,6 +11,8 @@ export class NewsComponent implements OnInit {
   stories = [];
   subscription: Subscription;
   timeinterval: any;
+  isFiltered: boolean = false;
+  selectedOption: string = 'top';
 
   constructor(private serverData: ServerDataService) { }
 
@@ -22,9 +24,11 @@ export class NewsComponent implements OnInit {
     }, 60000);
   }
 
-  changeSearchCategory(e) {
-    const selectedOption = e.target.value;
-    switch (selectedOption) {
+  changeSearchCategory(e = null) {
+    if (e) {
+      this.selectedOption = e.target.value;
+    }
+    switch (this.selectedOption) {
       case 'ask':
         this.getAskStories();
         clearInterval(this.timeinterval);
@@ -83,13 +87,15 @@ export class NewsComponent implements OnInit {
   filterData(e){
     let filterText = e.target.value.toLowerCase();
     if(filterText.length > 2) {
+      this.isFiltered = true;
       this.stories = this.stories.filter(function(element){
         if (element.title.toLowerCase().indexOf(filterText) > -1) {
           return element;
         }
       });
     } else {
-      this.getTopStories();
+      this.isFiltered = false;
+      this.changeSearchCategory();
     }
   }
 
