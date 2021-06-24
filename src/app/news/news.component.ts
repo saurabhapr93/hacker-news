@@ -10,39 +10,74 @@ import { ServerDataService } from '../shared/server-data.service';
 export class NewsComponent implements OnInit {
   stories = [];
   subscription: Subscription;
+  timeinterval: any;
 
   constructor(private serverData: ServerDataService) { }
 
   ngOnInit() {
-    this.stories = [];
-    this.serverData.setTopStories();
-    this.stories = this.serverData.getStories();
+    this.getTopStories();
+    clearInterval(this.timeinterval);
+    this.timeinterval = setInterval(()=>{
+      this.getTopStories();
+    }, 60000);
   }
 
   changeSearchCategory(e) {
     const selectedOption = e.target.value;
     switch (selectedOption) {
       case 'ask':
-        this.stories = [];
-        this.serverData.setAskStories();
-        this.stories = this.serverData.getStories();
+        this.getAskStories();
+        clearInterval(this.timeinterval);
+        this.timeinterval = setInterval(()=>{
+          this.getAskStories();
+        }, 60000);
         break;
       case 'show':
-        this.stories = [];
-        this.serverData.setShowStories();
-        this.stories = this.serverData.getStories();
+        this.getShowStories();
+        clearInterval(this.timeinterval);
+        this.timeinterval = setInterval(()=>{
+          this.getShowStories();
+        }, 60000);
         break;
       case 'jobs':
-        this.stories = [];
-        this.serverData.setJobStories();
-        this.stories = this.serverData.getStories();
+        this.getJobStories();
+        clearInterval(this.timeinterval);
+        this.timeinterval = setInterval(()=>{
+          this.getJobStories();
+        }, 60000);
         break;
       default:
-        this.stories = [];
-        this.serverData.setTopStories();
-        this.stories = this.serverData.getStories();
+        this.getTopStories();
+        clearInterval(this.timeinterval);
+        this.timeinterval = setInterval(()=>{
+          this.getTopStories();
+        }, 60000);
         break;
     }
+  }
+
+  getAskStories() {
+    this.stories = [];
+    this.serverData.setAskStories();
+    this.stories = this.serverData.getStories();
+  }
+
+  getShowStories() {
+    this.stories = [];
+    this.serverData.setShowStories();
+    this.stories = this.serverData.getStories();
+  }
+
+  getJobStories() {
+    this.stories = [];
+    this.serverData.setJobStories();
+    this.stories = this.serverData.getStories();
+  }
+
+  getTopStories() {
+    this.stories = [];
+    this.serverData.setTopStories();
+    this.stories = this.serverData.getStories();
   }
 
   filterData(e){
@@ -54,9 +89,7 @@ export class NewsComponent implements OnInit {
         }
       });
     } else {
-      this.stories = [];
-      this.serverData.setTopStories();
-      this.stories = this.serverData.getStories();
+      this.getTopStories();
     }
   }
 
