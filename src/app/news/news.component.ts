@@ -47,11 +47,17 @@ export class NewsComponent implements OnInit {
 
   filterData(e){
     let filterText = e.target.value.toLowerCase();
-    this.stories = this.stories.filter(function(element){
-      if (element.title.toLowerCase().indexOf(filterText) > -1) {
-        return element;
-      }
-    });
+    if(filterText.length > 2) {
+      this.stories = this.stories.filter(function(element){
+        if (element.title.toLowerCase().indexOf(filterText) > -1) {
+          return element;
+        }
+      });
+    } else {
+      this.stories = [];
+      this.serverData.setTopStories();
+      this.stories = this.serverData.getStories();
+    }
   }
 
   timeSince(date: number) {
